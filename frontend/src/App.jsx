@@ -15,6 +15,7 @@ import Signup from "./pages/Signup";
 import Admin from "./pages/Admin";
 import AdminRoute from "./components/AdminRoute";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
      
           </Routes>
         </main>
