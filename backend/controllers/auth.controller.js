@@ -106,12 +106,33 @@ export const verifyEmail = async (req, res) => {
     }
 };
 
+export const profile = async (req, res) => {
+	try {
+		// `protectRoute` middleware attaches `req.user`
+		const user = req.user;
+		if (!user) {
+			return res.status(401).json({ message: "Unauthorized" });
+		}
+
+		res.json({ user });
+	} catch (error) {
+		console.log("Error in profile controller", error.message);
+		res.status(500).json({ message: error.message });
+	}
+};
+
 export const login = async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		const user = await User.findOne({ email });
 
-		if (user && (await user.comparePassword(password))) {
+		if (!user) {
+			console.log(`Login attempt failed: user not found for email=${email}`);
+			return res.status(400).json({ message: "Invalid email or password" });
+		}
+
+		const isMatch = await user.comparePassword(password);
+		if (isMatch) {
 			const { accessToken, refreshToken } = generateTokens(user._id);
 			await storeRefreshToken(user._id, refreshToken);
 			setCookies(res, accessToken, refreshToken);
@@ -123,6 +144,7 @@ export const login = async (req, res) => {
 				role: user.role,
 			});
 		} else {
+			console.log(`Login attempt failed: password mismatch for email=${email}`);
 			res.status(400).json({ message: "Invalid email or password" });
 		}
 	} catch (error) {

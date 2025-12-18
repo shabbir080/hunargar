@@ -59,7 +59,8 @@ export default function Home() {
             Discover Authentic Handcrafted Art
           </h1>
           <p className="mt-5 text-lg sm:text-2xl opacity-90 font-light tracking-wide">
-            Crafted with love by Pakistan’s finest artisans — unique, meaningful, timeless.
+            Every Piece Tells a Pakistani Story 
+
           </p>
         </div>
       </section>

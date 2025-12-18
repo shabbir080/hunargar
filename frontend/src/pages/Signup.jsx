@@ -81,16 +81,18 @@ export default function Signup() {
                             <option value="admin" className="text-black">Admin</option>
                         </select>
                     </div>
-                    <Link to= "/login">
+                  
                     <motion.button
-                       
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
                         className="w-full py-3 bg-green-600 hover:bg-green-700 transition text-white rounded-xl font-semibold shadow-lg shadow-green-600/20"
+                       
                     >
+                     
                         Create Account
+                        
                     </motion.button>
-                    </Link>
+                    
                 </form>
 
                 <p className="text-center text-gray-300 mt-6 text-sm">

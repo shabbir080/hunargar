@@ -14,6 +14,7 @@ import {
   XCircle,
 } from "lucide-react";
 
+import Footer from "../components/Footer";
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
@@ -34,28 +35,18 @@ export default function ContactPage() {
     setLoading(true);
     setStatus(null);
 
-    try {
-      const res = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message);
-
+    // Simulate a successful send on the client without calling backend
+    setTimeout(() => {
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      setStatus("error");
-    } finally {
       setLoading(false);
-    }
+    }, 800);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white px-6 py-20">
+  
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white px-6 py-20">
       {/* HEADER */}
       <motion.div
         initial={{ opacity: 0, y: -40 }}
@@ -217,14 +208,17 @@ export default function ContactPage() {
             className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 py-4 rounded-xl font-semibold shadow-lg"
           >
             <Send size={18} />
-            {loading ? "Sending..." : "Send Message"}
+            {loading ? "Sending..." : "Send msg"}
           </motion.button>
         </motion.form>
       </div>
 
-      <div className="text-center mt-24 text-slate-400 text-sm">
-        © {new Date().getFullYear()} HandCraft. Crafted with care.
-      </div>
+     
+
     </div>
+      <Footer />
+    
+    </>
+
   );
 }

@@ -14,6 +14,7 @@ export default function Login() {
         e.preventDefault();
         try {
             const userData = await login({ email, password });
+            console.log('login response', userData);
 
             if (userData.role === "admin") {
                 navigate("/admin");

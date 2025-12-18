@@ -29,7 +29,7 @@ export default function NavBar() {
         px-6 md:px-12 lg:px-16 
         transition-all duration-500
         rounded-full 
-        ${scrolled ? "bg-white/80 shadow-md backdrop-blur-lg py-3" : "bg-white/50 py-4"}
+        ${scrolled ? "bg-gray-400 shadow-md backdrop-blur-lg py-3" : "bg-orange-400 py-4"}
       `}
     >
       <div className="flex items-center justify-between">
@@ -118,8 +118,8 @@ export default function NavBar() {
       {/* MOBILE SLIDE-IN MENU */}
       <nav
         className={`
-          md:hidden fixed top-0 left-0 h-full 
-          bg-white/80 backdrop-blur-xl 
+          md:hidden fixed top-0 pt-40 left-0 h-full 
+          bg-green-200 backdrop-blur-xl 
           flex flex-col items-center justify-center
           gap-6 text-gray-900 text-lg font-medium
           transition-all duration-500
