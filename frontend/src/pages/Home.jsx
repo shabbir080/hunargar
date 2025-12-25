@@ -70,16 +70,16 @@ export default function Home() {
   {/* ------------------ CATEGORY HEADING ------------------ */}
   <h1
     className="
-      text-5xl font-extrabold mb-14 text-center 
+      text-5xl font-extrabold mb-16 text-center 
       bg-gradient-to-r from-blue-500 to-indigo-600 
       bg-clip-text text-transparent tracking-tight
     "
   >
-    Explore by Region
+    Explore by  <span className="text-orange-600">Region</span>
   </h1>
 
   {/* ------------------ NEW CATEGORY UI ------------------ */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+  <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-10 mb-20">
 
     {categories.map((cat, i) => (
       <div
