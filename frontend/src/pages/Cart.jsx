@@ -131,9 +131,10 @@ export default function Cart() {
           >
             Checkout
           </motion.button>
+        
         </motion.div>
       </div>
-
+      
       {/* Invoice Modal */}
       <InvoiceModal
         isOpen={showInvoice}

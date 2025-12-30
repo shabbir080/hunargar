@@ -67,7 +67,7 @@ export const getFeaturedProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
 	try {
-		const { name, description, price, image, category } = req.body;
+		const { name, description, price, image, category, stock } = req.body;
 
 		let cloudinaryResponse = null;
 
@@ -81,6 +81,7 @@ export const createProduct = async (req, res) => {
 			price,
 			image: cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url : "",
 			category,
+			stock: Number(stock) || 0,
 		});
 
 		res.status(201).json(product);
@@ -124,13 +125,14 @@ export const getRecommendedProducts = async (req, res) => {
 				$sample: { size: 2 },
 			},
 			{
-				$project: {
-					_id: 1,
-					name: 1,
-					description: 1,
-					image: 1,
-					price: 1,
-				},
+					$project: {
+						_id: 1,
+						name: 1,
+						description: 1,
+						image: 1,
+						price: 1,
+						stock: 1,
+					},
 			},
 		]);
 
@@ -182,7 +184,7 @@ async function updateFeaturedProductsCache() {
 
 export const updateProduct = async (req, res) => {
 	try {
-		const { name, description, price, image, category } = req.body;
+		const { name, description, price, image, category, stock } = req.body;
 		const product = await Product.findById(req.params.id);
 
 		if (!product) {
@@ -221,6 +223,10 @@ export const updateProduct = async (req, res) => {
 		product.price = price || product.price;
 		product.category = category || product.category;
 		product.image = imageUrl;
+		// Only update stock if provided
+		if (typeof stock !== "undefined") {
+			product.stock = Number(stock);
+		}
 
 		const updatedProduct = await product.save();
 		res.json(updatedProduct);

@@ -19,6 +19,14 @@ export default function ProductCard({ product, onAdd }) {
         {product.description?.slice(0, 80)}{product.description?.length > 80 ? "..." : ""}
       </p>
 
+      <p className="text-sm mb-2">
+        {product.stock > 0 ? (
+          <span className="text-green-600 font-medium">In stock: {product.stock}</span>
+        ) : (
+          <span className="text-red-600 font-medium">Out of stock</span>
+        )}
+      </p>
+
       {/* PRICE & ACTIONS */}
       <div className="flex items-center justify-between mt-auto">
         <strong className="text-indigo-600 dark:text-indigo-400 text-lg">₹{product.price}</strong>
@@ -31,9 +39,10 @@ export default function ProductCard({ product, onAdd }) {
           </Link>
           <button
             onClick={() => onAdd(product._id)}
-            className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold transition"
+            disabled={product.stock <= 0}
+            className={`px-3 py-1.5 ${product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-600 cursor-not-allowed'} rounded-lg text-sm font-semibold transition`}
           >
-            Add
+            {product.stock > 0 ? 'Add' : 'Out' }
           </button>
         </div>
       </div>

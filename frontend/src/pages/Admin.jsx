@@ -13,7 +13,8 @@ export default function Admin() {
     description: "",
     price: "",
     category: "",
-    image: ""
+    image: "",
+    stock: 0
   });
   const [editId, setEditId] = useState(null);
 
@@ -63,7 +64,8 @@ export default function Admin() {
           description: form.description,
           price: Number(form.price),
           category: form.category,
-          image: form.image
+            image: form.image,
+            stock: Number(form.stock)
         });
         alert("Product updated successfully");
       } else {
@@ -72,11 +74,12 @@ export default function Admin() {
           description: form.description,
           price: Number(form.price),
           category: form.category,
-          image: form.image
+            image: form.image,
+            stock: Number(form.stock)
         });
         alert("Product created successfully");
       }
-      setForm({ name: "", description: "", price: "", category: "punjab", image: "" });
+      setForm({ name: "", description: "", price: "", category: "punjab", image: "", stock: 0 });
       setEditId(null);
       fetchAll();
     } catch (err) {
@@ -91,14 +94,15 @@ export default function Admin() {
       description: product.description,
       price: product.price,
       category: product.category,
-      image: product.image
+      image: product.image,
+      stock: product.stock || 0
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const cancelEdit = () => {
     setEditId(null);
-    setForm({ name: "", description: "", price: "", category: categories[0] || "", image: "" });
+    setForm({ name: "", description: "", price: "", category: categories[0] || "", image: "", stock: 0 });
   };
 
   const toggleFeatured = async (id) => {
@@ -139,7 +143,7 @@ export default function Admin() {
       "
         >
           "
-    >
+    
           <h2 className="text-xl font-bold text-gray-800">
             {editId ? "Update Product" : "Create Product"}
           </h2>
@@ -162,6 +166,20 @@ export default function Admin() {
             type="number"
             min="0"
             step="0.01"
+            required
+            className="
+          w-full px-3 py-2 rounded-lg border border-gray-300 bg-white
+          focus:ring-4 focus:ring-indigo-300 transition-all
+        "
+          />
+
+          <input
+            value={form.stock}
+            onChange={(e) => setForm({ ...form, stock: e.target.value })}
+            placeholder="Stock (quantity)"
+            type="number"
+            min="0"
+            step="1"
             required
             className="
           w-full px-3 py-2 rounded-lg border border-gray-300 bg-white

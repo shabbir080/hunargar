@@ -73,12 +73,25 @@ export default function ProductDetail() {
 
           <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <span className="text-2xl font-bold text-orange-600">₹{product.price}</span>
-            <button
-              onClick={addToCart}
-              className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300"
-            >
-              Add to Cart
-            </button>
+            <div className="flex items-center gap-3">
+              {product.stock > 0 ? (
+                <button
+                  onClick={addToCart}
+                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300"
+                >
+                  Add to Cart
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-6 py-3 bg-gray-300 text-gray-600 font-semibold rounded-xl shadow-inner cursor-not-allowed"
+                >
+                  Out of stock
+                </button>
+              )}
+
+              <span className="text-sm text-gray-600">{product.stock > 0 ? `${product.stock} available` : '0 available'}</span>
+            </div>
           </div>
 
           {/* Additional Info / CTA */}

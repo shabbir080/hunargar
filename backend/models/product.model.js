@@ -78,6 +78,12 @@ const productSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
+		// Number of items available in stock
+		stock: {
+			type: Number,
+			min: 0,
+			default: 0,
+		},
 	},
 	{ timestamps: true }
 );

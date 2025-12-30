@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";     // <-- Added import
 
 export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 }) {
   if (!isOpen) return null;
@@ -41,21 +42,23 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
   return (
     <div className="fixed inset-0 bg-black/50  flex items-center justify-center z-50 px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-xl overflow-hidden animate-fadeIn">
+        
         {/* Header */}
         <div className="bg-gradient-to-r from-purple-600 to-pink-500 text-white p-6 text-center">
           <h2 className="text-2xl font-bold">🧾 INVOICE</h2>
-             <motion.h2
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight"
           >
-             <span className="text-orange-600">HunarGar</span>
+            <span className="text-orange-600">HunarGar</span>
           </motion.h2>
         </div>
 
         {/* Invoice Content */}
         <div className="p-6" id="invoice-content">
+          
           {/* Order Info */}
           <div className="mb-6 flex justify-between text-sm text-gray-600">
             <div>Order ID: <span className="font-semibold">{orderId}</span></div>
@@ -73,6 +76,7 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
                   <th>Total</th>
                 </tr>
               </thead>
+
               <tbody>
                 {safeItems.length === 0 ? (
                   <tr>
@@ -86,11 +90,14 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
                       <td>{it?.product?.name || "Unknown"}</td>
                       <td className="text-center">{it?.quantity || 1}</td>
                       <td className="text-right">₹{it?.product?.price || 0}</td>
-                      <td className="text-right">₹{(it?.product?.price || 0) * (it?.quantity || 1)}</td>
+                      <td className="text-right">
+                        ₹{(it?.product?.price || 0) * (it?.quantity || 1)}
+                      </td>
                     </tr>
                   ))
                 )}
               </tbody>
+
               <tfoot>
                 <tr>
                   <td colSpan="3" className="text-right">Total:</td>
@@ -100,7 +107,6 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
             </table>
           </div>
 
-          {/* Thank You Note */}
           <div className="text-center mt-6 text-gray-700 font-semibold">
             Thank you for shopping with <span className="text-purple-600 font-bold">HunarGar</span>!
           </div>
@@ -108,6 +114,8 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
 
         {/* Footer Buttons */}
         <div className="p-6 flex flex-col gap-3">
+
+          {/* Print */}
           <button
             onClick={handlePrint}
             className="w-full bg-green-600 text-white py-2 rounded-xl font-semibold hover:bg-green-700 transition"
@@ -115,6 +123,15 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
             Print Invoice
           </button>
 
+          {/* New Button - Other Payment Options */}
+          <Link
+            to="/payment-options"         
+            className="w-full bg-blue-600 text-white py-2 rounded-xl font-semibold text-center hover:bg-blue-700 transition"
+          >
+            Other Payment Options
+          </Link>
+
+          {/* Close */}
           <button
             onClick={onClose}
             className="w-full bg-gray-700 text-white py-2 rounded-xl font-semibold hover:bg-gray-800 transition"
@@ -122,6 +139,7 @@ export default function InvoiceModal({ isOpen, onClose, items = [], total = 0 })
             Close
           </button>
         </div>
+
       </div>
     </div>
   );

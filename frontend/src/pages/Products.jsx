@@ -148,14 +148,21 @@ export default function Products() {
                         ₹{p.price}
                       </span>
 
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => addToCart(p._id)}
-                        className="bg-white text-gray-800 px-5 py-2 rounded-xl font-bold shadow-lg hover:bg-gray-200 transition"
-                      >
-                        Add to Cart
-                      </motion.button>
+                      <div className="flex items-center gap-3">
+                        <motion.button
+                          whileHover={{ scale: p.stock > 0 ? 1.1 : 1 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => addToCart(p._id)}
+                          disabled={p.stock <= 0}
+                          className={`px-5 py-2 rounded-xl font-bold shadow-lg transition ${p.stock > 0 ? 'bg-white text-gray-800 hover:bg-gray-200' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                        >
+                          {p.stock > 0 ? 'Add to Cart' : 'Out of stock'}
+                        </motion.button>
+
+                        <span className={`text-sm font-medium ${p.stock > 0 ? 'text-green-300' : 'text-red-400'}`}>
+                          {p.stock > 0 ? `${p.stock} in stock` : '0 in stock'}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

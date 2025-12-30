@@ -16,6 +16,7 @@ import Admin from "./pages/Admin";
 import AdminRoute from "./components/AdminRoute";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Payment from "./pages/Payment";
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/payment-options" element={<Payment />} />
      
           </Routes>
         </main>
